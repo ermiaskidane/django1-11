@@ -1,0 +1,13 @@
+<!-- THIS IS COMBINED TO DETAIL-UPDATED.HTML NO LONGER NEEDED -->
+{% extends 'base.html' %}
+
+{% block head_title %} Restaurant || {{block.super}} {% endblock head_title %}
+
+{% block content %}
+    <h1>{{object.name}} <small>{{object.catagory}}</small></h1>
+    <p>{{object.location}}</p>
+    <p>{{object.timestap}} <br> updated {{object.updated|timesince}} ago</p>
+    <!-- <p>{{object.files}}</p> -->
+
+
+{% endblock %}

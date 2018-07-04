@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>{% block head_title %} ecommerce {% endblock head_title %}</title>
+
+    {% include 'snippets/css.html' %}
+
+  </head>
+  <body>
+
+    <h1 class="container">Ecommerce2</h1>
+    {% include 'snippets/nav.html' %}
+
+    <div class="container">
+      {% block content %}
+          block here!
+      {% endblock content %}
+    </div>
+
+
+  {% include 'snippets/js.html' %}
+  </body>
+</html>

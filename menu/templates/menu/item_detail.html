@@ -1,0 +1,28 @@
+<!-- THIS ISN'T IN USE ANYMORE, COMBINED TO DETAIL-UPDATE.HTML -->
+{% extends 'base.html' %}
+
+{% block head_title %} menu items || {{block.super}} {% endblock head_title %}
+
+{% block content %}
+    <h1>{{ object.name }}</h1>
+    <p>location:{{object.restaurant.location}}</p>
+    {% if object.contents %}
+      content
+      <ul>
+        {% for item in object.get_contents %}
+        <li>{{item}}</li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+
+
+    {% if object.excludes %}
+        excludes
+        <ul>
+          {% for item in object.get_excludes %}
+          <li>{{item}}</li>
+          {% endfor %}
+        </ul>
+    {% endif %}
+
+{% endblock %}

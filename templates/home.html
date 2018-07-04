@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block head_title %} Welcome || {{block.super}} {% endblock head_title %}
+
+{% block content %}
+  
+    <h1>hello world!</h1>
+    <h3>{{block.super}}</h3>
+
+    <p>this is <code>{% verbatim %} {{html_var}} {% endverbatim %}</code>coming through</p>
+
+    <p>
+      {% if num is not None %}
+        this is a random number: {{num}}
+      {% endif %}
+    </p>
+
+
+    <p>p {{bool_items }}</p>
+
+  <p>
+    <h2>break</h2>
+
+    {% for some_items in some_list %}
+        {% if some_items|divisibleby:"3" %}
+            odd number
+        {% endif %}
+        {{some_items}} <br>
+
+    {% endfor %}
+
+  </p>
+
+<p> some items is {{some_list}}</p>
+{% endblock %}

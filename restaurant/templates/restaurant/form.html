@@ -1,0 +1,31 @@
+<!-- THIS IS MULFUNCTION IT HAS NO ROLE BECAUSE IT PASSED TO TEMPLATES/FORM.HTML -->
+{% extends 'base.html' %}
+
+{% block head_title %} {{title}}  {# ADD RESTAURANT#}|| {{block.super}} {% endblock head_title %}
+
+{% block content %}
+
+<!-- <h1>add restaurant</h1> -->
+<h1>{{title}}</h1>
+<!-- {% if errors %}
+   {{errors}}
+{% endif %} -->
+
+{% if form.errors.non_field_errors %}
+   {{form.errors.non_field_errors }}
+{% endif %}
+
+<form action="#" method="POST">
+  {% csrf_token %}
+
+{{form.as_p}}
+  <button type="submit">save</button>
+</form>
+
+{% endblock %}
+
+
+<!-- <input type="text" name="name" placeholder="your title" required><br>
+<input type="text" name="location" placeholder="your location"><br>
+<input type="text" name="category" placeholder="your catagory"><br> -->
+<!-- <input type="file" name="file"> -->

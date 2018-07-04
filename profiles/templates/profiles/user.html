@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+
+{% block head_title %} {{user.username}} || {{block.super}} {% endblock head_title %}
+
+{% block content %}
+    <h1>{{user.username}}</h1>
+  <hr/>
+  <!-- {{user.restaurantlocation_set.all}} -->
+  <!-- {{user.item_set.all}} -->
+  <!-- <ul>
+  {% for rest in user.restaurantlocation_set.all %}
+    <li>{{rest.name}}</li>
+    <ul>
+      <li>{{user.item_set.all}}</li>
+    </ul>
+  {% endfor %} -->
+</ul>
+<!-- {{request.user.is_following.all}} -->
+
+ <!-- is the same as  request.user.profile.followers.all -->
+<!-- {% if user.profile in request.user.is_following.all %}
+    is following
+{% endif %} -->
+<p>{% include 'profiles/snippet/follow_form.html'  with username=user.username is_following=is_following %}</p>  <!-- before it was is_following = True -->
+
+  <form class="form" method="GET" action=".">
+    <input type="text" placeholder="search..." name="q" value="{{request.GET.q}}">
+    <button class="btn btn-default" type="submit">Search</button>
+  </form>
+
+  {% if user.item_set.all.exists %}
+      {% if locations %}
+
+      {% for rest in  locations %}  <!-- THIS locations  DOES SUBTUTUES FOR user.restaurantlocation_set.all -->
+
+      <div class="row">
+        <!-- <div class="col-sm-12" style="border: 1px solid #ccc; border-radius: 5px; margin-bottom: 15px; ">  -->
+        <div class="col-sm-12" style="margin-bottom: 15px;" >
+          <div class="card card-defualt">
+            <h4>{{rest.name}}</h4>
+            <!-- <p>{{rest.location}} | {{rest.category}}</p> -->
+            <p>
+              <a href="{{request.path}}?q={{rest.location}}">{{rest.location}}</a> |
+              <a href="{{request.path}}?q={{rest.category}}">{{rest.category}}</a>
+           </p>
+            <p>
+              <!-- <a href="#">items</a> -->
+            <ul>
+
+              {% for item in user.item_set.all %}
+                <li style='margin-bottom: 15px;'><b>{{item.name}}</b></li>
+
+                   <p> item include:  {{item.contents}} </p>
+                  <p>item exclude:  {{item.excludes}} </p>
+
+                    {% for ing in item.get_contents %}
+                      <a href="{{request.path}}?q={{ing}}">{{ing}}</a>
+                    {% endfor %}
+
+                    <!-- {% for ing in item.get_contents %}
+                      <span class="badge badge-default">{{ing}}</span>
+                    {% endfor %}
+
+                    {% for ing in item.get_contents %}
+                      <span style="padding: 2px 4px; margin-right:4px; background-color:#ccc;">{{ing}}</span>
+                    {% endfor %} -->
+
+              {% endfor %}
+            </ul>
+            </p>
+          <!-- <hr> -->
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+
+
+  {% else %}
+
+  <p class="lead">No item found</p>
+
+
+      {% endif %}
+  {% endif %}
+
+
+<!-- <ul>
+  {% for item in user.item_set.all %}
+      <li>{{item}}</li>
+  {% endfor %}
+</ul> -->
+
+{% endblock %}
